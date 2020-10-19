@@ -53,7 +53,7 @@ NOTE: You can specify your own variables in `group_vars` or `host_vars`.
     fluentbit_outputs:
       - {"name: "stdout", "match": "*"}
   roles:
-    - { role: username.rolename, x: 42 }
+    - be99inner.fluentbit
 ```
 
 ## License
