@@ -1,6 +1,6 @@
 # Role Name
 
-Ansible to install and configure Fluentbit
+Ansible role to install and configure Fluentbit.
 
 ## Requirements
 
