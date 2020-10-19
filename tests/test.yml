@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  remote_user: root
+  become: true
+  gather_fact: true
+  variables:
+    fluentbit_inputs:
+      - {"name": "cpu", "tag": "cpu.local", "interval_sec": 1}
+    fluentbit_outputs:
+      - {"name": "stdout", "match": "*"}
+  roles:
+    - .
