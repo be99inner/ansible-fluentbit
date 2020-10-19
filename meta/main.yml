@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: fluentbit
   author: Anurak Jannawan
   description: Ansible to install and configure fluentbit
   company: Opsta Thailand Co,.Ltd.

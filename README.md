@@ -61,7 +61,7 @@ NOTE: You can specify your own variables in `group_vars` or `host_vars`.
     fluentbit_outputs:
       - {"name: "stdout", "match": "*"}
   roles:
-    - be99inner.ansible_fluentbit
+    - be99inner.fluentbit
 ```
 
 ## License
