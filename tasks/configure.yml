@@ -1,0 +1,18 @@
+- name: Copy plugins to target
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ _fluentbit_config_path }}/plugins/{{ item.lib }}"
+    mode: 0644
+  with_list: "{{ fluentbit_plugins_paths }}"
+  when: fluentbit_plugins_paths != []
+
+- name: Configure fluentbit via configure template
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ _fluentbit_config_path }}/{{ item }}"
+    # validate: "{{ _fluentbit_bin_path }}/td-agent-bit -c %s"
+  with_items:
+    - parsers.conf
+    - plugins.conf
+    - td-agent-bit.conf
+  notify: restart fluentbit service

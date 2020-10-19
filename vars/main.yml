@@ -1,0 +1,5 @@
+---
+fluentbit_pgp_key_url: "https://packages.fluentbit.io/fluentbit.key"
+_fluentbit_package_name: td-agent-bit
+_fluentbit_bin_path: /opt/td-agent-bit/bin
+_fluentbit_config_path: /etc/td-agent-bit

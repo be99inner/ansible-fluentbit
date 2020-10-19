@@ -1,0 +1,110 @@
+---
+# Flush
+# =====
+# set an interval of seconds before to flush records to a destination
+fluentbit_service_flush: 5
+
+# Daemon
+# ======
+# instruct Fluent Bit to run in foreground or background mode.
+fluentbit_service_daemon: Off
+
+# Log_Level
+# =========
+# Set the verbosity level of the service, values can be:
+# - error
+# - warning
+# - info
+# - debug
+# - trace
+# by default 'info' is set, that means it includes 'error' and 'warning'.
+fluentbit_service_log_level: info
+
+# Parsers File
+# ============
+# specify an optional 'Parsers' configuration file
+fluentbit_service_parsers_file: parsers.conf
+
+# Plugins File
+# ============
+# specify an optional 'Plugins' configuration file to load external plugins.
+fluentbit_service_plugins_file: plugins.conf
+
+# HTTP Server
+# ===========
+# Enable/Disable the built-in HTTP Server for metrics
+fluentbit_service_http_server: Off
+fluentbit_service_http_listen: 0.0.0.0
+fluentbit_service_http_port: 2020
+
+# Storage
+# =======
+# CAUTION: fluentbit_service_storage_path will trigger to use storage
+# and another service on storage confiuration
+# set to "" to disable storage option
+#
+# Fluent Bit can use memory and filesystem buffering based mechanisms
+#
+# - https://docs.fluentbit.io/manual/administration/buffering-and-storage
+#
+# storage metrics
+# ---------------
+# publish storage pipeline metrics in '/api/v1/storage'. The metrics are
+# exported only if the 'http_server' optoin is enabled.
+fluentbit_service_storage_metrics: on
+# storage.path
+# ------------
+# absolute file system path to store filesystem data buffers (chunks).
+fluentbit_service_storage_path: "/var/lib/td-agent-bit"
+# storage.sync
+# ------------
+# configure the synchronization mode used to store the data into the
+# filesystem. It can take the values normal or full.
+fluentbit_service_storage_sync: normal
+# storage.checksum
+# ----------------
+# enable the data integrity check when writing and reading data from the
+# filesystem. The storage layer uses the CRC32 algorithm.
+fluentbit_service_storage_checksum: off
+# storage.backlog.mem_limit
+# -------------------------
+# if storage.path is set, Fluent Bit will look for data chunks that were
+# not delivered and are still in the storage layer, these are called
+# backlog data. This option configure a hint of maximum value of memory
+# to use when processing these records.
+fluentbit_service_storage_backlog_mem_limit: 5M
+# If the input plugin has enabled filesystem storage type,
+# this property sets the maximum number of Chunks that can be up in memory.
+# This helps to control memory usage. If the input plugin has enabled
+# filesystem storage type, this property sets the maximum number of Chunks
+# that can be up in memory. This helps to control memory usage.
+fluentbit_service_storage_max_chunks_up: 128
+
+# Additional Configuration for fluentbit service
+# ----------------------------------------------
+fluentbit_service_additional: []
+# - { "example_conf_key": "example_conf_value"}
+
+# Input
+# =============================
+# REQUIRED: need to setup
+fluentbit_inputs: []
+# - {"Name": "cpu", "Tag": "my_cpu" }
+
+# Output
+# ==============================
+# REQUIRED: need to setup
+fluentbit_outputs: []
+# - {"Name": "stdout", "Match": "*"}
+
+# Additional Parser
+fluentbit_custom_parsers: []
+# - {"Name": "custom_parser", "Format": "Regex", "Regex", "(?time)"}
+
+# Custom plugins
+# you can specify custom compiled plugins to install to target host
+fluentbit_plugins_paths: []
+# path: path of your lib to copy from "/path/to/plugins.so"
+# lib: install to target as "plugins.so"
+# - path: "/path/to/plugins.so"
+#   lib: "plugins.so

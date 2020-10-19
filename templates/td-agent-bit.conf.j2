@@ -1,0 +1,41 @@
+{{ ansible_managed|comment }}
+
+[SERVICE]
+    flush        {{ fluentbit_service_flush }}
+    daemon       {{ fluentbit_service_daemon }}
+    log_level    {{ fluentbit_service_log_level }}
+    parsers_file {{ fluentbit_service_parsers_file }}
+    plugins_file {{ fluentbit_service_plugins_file }}
+    http_server  {{ fluentbit_service_http_server }}
+    http_listen  {{ fluentbit_service_http_listen }}
+    http_port    {{ fluentbit_service_http_port }}
+
+{% if fluentbit_service_storage_path|length != 0 %}
+    storage.metrics     {{ fluentbit_service_storage_metrics }}
+    storage.path        {{ fluentbit_service_storage_path }}
+    storage.sync        {{ fluentbit_service_storage_sync }}
+    storage.checksum    {{ fluentbit_service_storage_checksum }}
+    storage.backlog.mem_limit   {{ fluentbit_service_storage_backlog_mem_limit }}
+    storage.max_chunks_up       {{ fluentbit_service_storage_max_chunks_up }}
+{% endif %}
+
+{% if fluentbit_service_additional != [] %}
+    # additional configuration
+{% for service in fluentbit_service_additional %}
+    {{ key }}   {{ service[key] }}
+{% endfor %}
+{% endif %}
+
+{% for input in fluentbit_inputs %}
+[INPUT]
+{% for key in input %}
+    {{ key }} {{ input[key] }}
+{% endfor %}
+{% endfor %}
+
+{% for output in fluentbit_outputs %}
+[OUTPUT]
+{% for key in output %}
+    {{ key }} {{ output[key] }}
+{% endfor %}
+{% endfor %}

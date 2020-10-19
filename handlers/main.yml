@@ -1,0 +1,5 @@
+---
+- name: restart fluentbit service
+  systemd:
+    name: "{{ _fluentbit_package_name }}"
+    state: restarted

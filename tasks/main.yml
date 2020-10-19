@@ -1,0 +1,43 @@
+---
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags:
+    - fluentbit_configure
+    - fluentbit_install
+    - fluentbit_run
+
+- import_tasks: preflight.yml
+  tags:
+    - fluentbit_configure
+    - fluentbit_install
+    - fluentbit_run
+
+- include_tasks: "install-{{ ansible_os_family | lower }}.yml"
+  tags:
+    - fluentbit_install
+
+- name: Create plugins path for fluentbit
+  file:
+    path: "{{ _fluentbit_config_path }}/plugins"
+    owner: root
+    group: root
+    mode: 0644
+    state: directory
+  tags:
+    - fluentbit_install
+
+- import_tasks: configure.yml
+  tags:
+    - fluentbit_configure
+
+- name: Ensure fluentbit service is started and enabled
+  become: true
+  systemd:
+    name: "{{ _fluentbit_package_name }}"
+    state: started
+    enabled: true
+  tags:
+    - fluentbit_run

@@ -1,0 +1,30 @@
+- name: Assert usage of systemd as an init system
+  assert:
+    that: ansible_service_mgr == 'systemd'
+    msg: "This module only work with systemd"
+
+- name: Check Ubuntu support version
+  assert:
+    that:
+      - ansible_distribution_major_version|int >= 16
+      - ansible_distribution_major_version|int <= 20
+    fail_msg: "OS is not support for this role, Ubuntu should be 16.04, 18.04, or 20.04"
+    quiet: true
+  when: ansible_distribution|lower == "ubuntu"
+
+- name: Check Debian support version
+  assert:
+    that:
+      - ansible_distribution_major_version|int >= 8
+      - ansible_distribution_major_version|int <= 10
+    fail_msg: "OS is not support for this role, Debian should be 8, 9, or 10"
+    quiet: true
+  when: ansible_distribution|lower == "debian"
+
+- name: Check RHEL/CentOS support version
+  assert:
+    that:
+      - ansible_distribution_major_version|int >= 7
+    fail_msg: "OS is not support for this role,"
+    quiet: true
+  when: ansible_os_family|lower == "redhat"

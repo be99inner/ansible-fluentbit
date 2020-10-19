@@ -1,0 +1,8 @@
+{{ ansible_managed|comment }}
+
+[PLUGINS]
+{% if fluentbit_plugins_paths != [] %}
+{% for plugin in fluentbit_plugins_paths %}
+    {{ _fluentbit_config_path}}/plugins/{{ plugin["lib"] }}
+{% endfor %}
+{% endif %}

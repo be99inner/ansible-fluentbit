@@ -1,0 +1,37 @@
+- name: Create storage path for fluentbit
+  file:
+    path: "{{ fluentbit_service_storage_path }}"
+    owner: root
+    group: root
+    mode: 0644
+    state: directory
+  when: fluentbit_service_storage_path|length != 0
+  tags:
+    - fluentbit_install
+    - fluentbit_configure
+
+- block:
+  - name: Install require packages for fluentbit
+    apt:
+      name: "{{ _fluentbit_require_package }}"
+      state: present
+      update_cache: yes
+
+  - name: Add pgp key to apt package manager
+    apt_key:
+      url: "{{ fluentbit_pgp_key_url }}"
+      state: present
+
+  - name: Add repository to apt package manager
+    apt_repository:
+      repo: "{{ fluentbit_apt_repo_url }}"
+      filename: fluentbit_repo
+      state: present
+
+  - name: Install fluentbit to target
+    apt:
+      name: "{{ _fluentbit_package_name }}"
+      state: present
+      update_cache: yes
+  tags:
+    - fluentbit_install
