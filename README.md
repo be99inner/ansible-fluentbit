@@ -4,7 +4,7 @@ Ansible to install and configure Fluentbit
 
 ## Requirements
 
-- ansible version: 2.9
+- Ansible version >= 2.9
 
 ## Role Variables
 
