@@ -36,6 +36,14 @@ more information on [defaults](https://github.com/be99inner/ansible-fluentbit/bl
 
 None
 
+## Installation
+
+You can install this role via `anslbie-galaxy`.
+
+```sh
+ansible-galaxy install be99inner.ansible_fluentbit
+```
+
 ## Example Playbook
 
 Example of playbook configuration, You need to specify
@@ -53,7 +61,7 @@ NOTE: You can specify your own variables in `group_vars` or `host_vars`.
     fluentbit_outputs:
       - {"name: "stdout", "match": "*"}
   roles:
-    - be99inner.fluentbit
+    - be99inner.ansible_fluentbit
 ```
 
 ## License
