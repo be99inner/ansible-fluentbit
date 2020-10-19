@@ -41,7 +41,7 @@ None
 You can install this role via `anslbie-galaxy`.
 
 ```sh
-ansible-galaxy install be99inner.ansible_fluentbit
+ansible-galaxy install be99inner.fluentbit
 ```
 
 ## Example Playbook
