@@ -54,8 +54,8 @@ NOTE: You can specify your own variables in `group_vars` or `host_vars`.
 ```yaml
 - hosts: all
   become: true
-  gather_fact: true
-  variables:
+  gather_facts: true
+  vars:
     fluentbit_inputs:
       - {"name": "cpu", "tags": "cpu.local", "interval_sec": 5}
     fluentbit_outputs:
