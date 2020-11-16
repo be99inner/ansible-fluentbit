@@ -28,3 +28,10 @@
     fail_msg: "OS is not support for this role,"
     quiet: true
   when: ansible_os_family|lower == "redhat"
+
+- name: Checking fluent-bit is configured
+  assert:
+    that:
+      - fluentbit_inputs != []
+      - fluentbit_outputs != []
+    fail_msg: "You configuration is missing!!!"
