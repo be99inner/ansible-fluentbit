@@ -1,0 +1,20 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  become: true
+  vars:
+    fluentbit_inputs:
+      - {"name": "cpu", "tag": "cpu.local", "interval_sec": 1}
+    fluentbit_outputs:
+      - {"name": "stdout", "match": "*"}
+    fluentbit_service_storage_path: ""
+    # fluentbit_plugins_paths:
+    #   - path: demo.so
+    #     lib: demo.so
+    #   - path: demo2.so
+    #     lib: demo2.so
+  tasks:
+    - name: "Include ansible-fluentbit"
+      include_role:
+        name: "ansible-fluentbit"

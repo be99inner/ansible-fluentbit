@@ -1,0 +1,52 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: ubuntu-16.04
+    image: be99inner/ubuntu-molecule:16.04
+    privileged: True
+    security_opts:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /tmp
+      - /run
+    capabilities:
+      - SYS_ADMIN
+    groups:
+      - debian_family
+  - name: ubuntu-18.04
+    image: be99inner/ubuntu-molecule:18.04
+    privileged: True
+    security_opts:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /tmp
+      - /run
+    capabilities:
+      - SYS_ADMIN
+    groups:
+      - debian_family
+  - name: ubuntu-20.04
+    image: be99inner/ubuntu-molecule:20.04
+    privileged: True
+    security_opts:
+      - seccomp:unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /tmp
+      - /run
+    capabilities:
+      - SYS_ADMIN
+    groups:
+      - debian_family
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
