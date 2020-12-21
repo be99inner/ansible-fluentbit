@@ -121,6 +121,8 @@
 # custom parser
 {% for parser in fluentbit_custom_parsers %}
 [PARSER]
-    {{ key }} {{ parser[key] }}
+{% for key,value in parser.items() %}
+    {{ key }} {{ value }}
+{% endfor %}
 {% endfor %}
 {% endif %}
