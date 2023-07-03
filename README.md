@@ -1,3 +1,7 @@
+# This Project is no longer maintance. Please visit https://github.com/julyninth/ansible-fluentbit
+
+------------------------------------------------------------------------------
+
 # Role Name
 
 Ansible role to install and configure Fluentbit.
